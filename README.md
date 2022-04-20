@@ -10,7 +10,7 @@ sampleusersearch = 'one piece'
 
 samplesource = 'https://api.jikan.moe/v3/search/anime?q='
 
-Sample search result: [source] + [sampleusersearch]
+Sample search result: [samplesource] + [sampleusersearch]
 
 Features of app
 - Upon page load, show user a `Suggested Anime` from a defined list
