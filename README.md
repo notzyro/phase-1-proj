@@ -19,6 +19,6 @@ Features of app
 - Allow user to `Like` an anime that retains the event while the page is not reloaded
 
 Event Listeners used:
-- Click
+- OnClick
 - DomContentLoaded
-- 
+- OnKeyDown
