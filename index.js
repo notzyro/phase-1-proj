@@ -43,7 +43,9 @@ function search() {
       }
     });
 }
-document.getElementById('search_query').onkeydown = (event) => {
+var inputonEnter = document.getElementById('search_query');
+
+inputonEnter.addEventListener("keydown", function(event) {
   if (event === 13) {
       search();
   }
