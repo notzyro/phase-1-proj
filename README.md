@@ -13,12 +13,13 @@ samplesource = 'https://api.jikan.moe/v3/search/anime?q='
 Sample search result: [samplesource] + [sampleusersearch]
 
 Features of app
-- Upon page load, show user a `Suggested Anime` from a defined list
-- Allow user to search for anime from list
-- Allow dark/light mode for page
+- Upon page load, show user a `Suggested Anime` from a defined list - ✔
+- Allow user to search for anime from list - ✔
+- Allow dark/light mode for page - ✔ 
 - Allow user to `Like` an anime that retains the event while the page is not reloaded
 
 Event Listeners used:
-- OnClick
-- DomContentLoaded
+- OnClick - ✔
+- DomContentLoaded - ✔
 - OnKeyDown
+- Hover
