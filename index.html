@@ -25,6 +25,24 @@
   <title> Anime Search App</title>
   </head>  
   <body>
+    <div class="mode">
+        Dark mode:            
+        <span class="change">OFF</span>
+    </div>
+    <p>
+        Click on the switch on top-right to move to dark mode.
+    </p>
+    <script>
+        $( ".change" ).on("click", function() {
+            if( $( "body" ).hasClass( "dark" )) {
+                $( "body" ).removeClass( "dark" );
+                $( ".change" ).text( "OFF" );
+            } else {
+                $( "body" ).addClass( "dark" );
+                $( ".change" ).text( "ON" );
+            }
+        });
+    </script>
     <div class="content">
       <!-- Content will go here -->
       <h1> Anime Search App</h1>
