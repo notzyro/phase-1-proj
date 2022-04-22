@@ -1,0 +1,109 @@
+{
+  "anime": [
+    {
+      "id": 1,
+      "name": "Naruto",
+      "image": "placeholder",
+      "synopsis" : "placeholder",
+      "url" : "placeholder",
+    },
+    {
+      "id": 2,
+      "name": "One Piece",
+      "image": "placeholder",
+      "synopsis" : "placeholder",
+      "url" : "placeholder",
+    }
+    {
+      "id": 3,
+      "name": "Bleach",
+      "image": "placeholder",
+      "synopsis" : "placeholder",
+      "url" : "placeholder",
+    }
+    {
+      "id": 4,
+      "name": "Kaguya-Sama Love Is War",
+      "image": "placeholder",
+      "synopsis" : "placeholder",
+      "url" : "placeholder",
+    }
+    {
+      "id": 5,
+      "name": "Horimiya",
+      "image": "placeholder",
+      "synopsis" : "placeholder",
+      "url" : "placeholder",
+    }
+    {
+      "id": 6,
+      "name": "My Dress-Up darling",
+      "image": "placeholder",
+      "synopsis" : "placeholder",
+      "url" : "placeholder",
+    }
+    {
+      "id": 7,
+      "name": "Dr. Stone",
+      "image": "placeholder",
+      "synopsis" : "placeholder",
+      "url" : "placeholder",
+    }
+    {
+      "id": 8,
+      "name": "Fairy Tail",
+      "image": "placeholder",
+      "synopsis" : "placeholder",
+      "url" : "placeholder",
+    }
+    {
+      "id": 9,
+      "name": "Maid-Sama",
+      "image": "placeholder",
+      "synopsis" : "placeholder",
+      "url" : "placeholder",
+    }
+    {
+      "id": 10,
+      "name": "Demon Slayer",
+      "image": "placeholder",
+      "synopsis" : "placeholder",
+      "url" : "placeholder",
+    }
+    {
+      "id": 11,
+      "name": "Haikyuu",
+      "image": "placeholder",
+      "synopsis" : "placeholder",
+      "url" : "placeholder",
+    }
+    {
+      "id": 12,
+      "name": "That Time I Got Reincarnated As A Slime",
+      "image": "placeholder",
+      "synopsis" : "placeholder",
+      "url" : "placeholder",
+    }
+    {
+      "id": 13,
+      "name": "Spy X Family",
+      "image": "placeholder",
+      "synopsis" : "placeholder",
+      "url" : "placeholder",
+    }
+    {
+      "id": 14,
+      "name": "Eighty-Six",
+      "image": "placeholder",
+      "synopsis" : "placeholder",
+      "url" : "placeholder",
+    }
+    {
+      "id": 15,
+      "name": "Fruits Basket",
+      "image": "placeholder",
+      "synopsis" : "placeholder",
+      "url" : "placeholder",
+    }
+  ]
+}
