@@ -20,17 +20,19 @@
     .title {
       border: 20px black;
       margin: auto;
-      width: 50%;
+      width: 25%;
       height: auto;
       padding: 10px;
+      text-align: center;
     }
 
     .container {
-      border: 10px black;
+      border: 20px black;
       margin: auto;
-      width: auto;
+      width: 25%;
       height: auto;
       padding: 10px;
+      text-align: center;
     }
 
     .content {
@@ -38,20 +40,29 @@
       margin: auto;
       width: auto;
       padding: 10px;
+      text-align: center;
     }
 
     .card {
       margin: auto;
-      width: 50%;
-      border: 3px solid rgb(0, 0, 0);
-      padding: 10px;
+      width: 20%;
+      border: 10px black;
+      padding: auto;
+      text-align: center;
     }
 
     .synopsis {
       margin: auto;
       width: 50%;
-      border: 3px solid rgb(0, 0, 0);
       padding: 10px;
+      text-align: center;
+    }
+
+    .searchresults {
+      margin: auto;
+      width: 15%;
+      padding: 10px;
+      text-align: center;
     }
 
     .dark-mode {
@@ -83,29 +94,27 @@
 </head>
 
 <body>
-  <div id="grad1">
   <div class="mode">
     Display:
     <button class="button change">
       <span class="change">☀ Light</span>
+      <script>
+        $(".change").on("click", function () {
+          if ($("body").hasClass("dark-mode")) {
+            $("body").removeClass("dark-mode");
+            $(".change").text("☀ Light");
+          } else {
+            $("body").addClass("dark-mode");
+            $(".change").text("☾ Dark");
+          }
+        });
+      </script>
     </button>
   </div>
-  <script>
-    $(".change").on("click", function () {
-      if ($("body").hasClass("dark-mode")) {
-        $("body").removeClass("dark-mode");
-        $(".change").text("☀ Light");
-      } else {
-        $("body").addClass("dark-mode");
-        $(".change").text("☾ Dark");
-      }
-    });
-  </script>
   <div class="title">
     <h1> Anime Search App</h1>
   </div>
   <div class="container">
-    <!-- Content will go here -->
     <label for="search_query"></label>
     <input autocomplete="off" id="search_query" type="text" placeholder="" />
     <button type="button" onclick="fetchData(); document.getElementById('search_query').value = null"> <img
@@ -117,6 +126,7 @@
         onmouseover="onImg.call(this)" onmouseout="offImg.call(this)"></button>
     <hr />
   </div>
+  <div id="search_results" class="searchresults"></div>
   <div id="search_box" class="content">
     <script>
       document.getElementById("search_query").setAttribute('size', '100');
@@ -140,22 +150,22 @@
         let request = document.getElementById('search_query').value;
         if (request === '')
           request = document.getElementById("search_query").placeholder;
-        $("#search_box").html("Searching...");
+        $("#search_results").html("Searching...");
         let aRequest = `https://api.jikan.moe/v4/anime?q=${request}&sfw`;
-        document.getElementById('search_query').value = null
+        document.getElementById('search_query').value = null;
         const response = await fetch(aRequest);
         const data = await response.json();
         const match = [];
         const maxResults = 10;
         let i = 0;
         data.data.forEach(o => {
-          if (i > maxResults) {
+          if (i === maxResults) {
             return;
           }
           match.push(
-            `<h3><a href="${o.url}" class="card">
+            `<h1><a href="${o.url}" class="card">
             <div class="card__name">
-              <span>${o.title}</span> 
+              <span><font size="+1">${o.title}</span> 
             </div>
             <div class="card__image">
               <img src="${o.images.jpg.large_image_url}" height="225" width="195" background="black"/>
@@ -166,15 +176,24 @@
             <p><font size="-1">${'Synopsis: ' + o.synopsis || 'No synopsis found!'}</font></p>
             </div>
             <hr />
-            </h3>`
+            </h1>`
           )
           $("#search_box").html(match.join("<br />"));
-          console.log(o.title);
+          console.log(o.title);          
           i++;
         });
+        let msg = '';
+          if (match.length === 1 ? msg = ' Result' : msg = ' Results');
+          if (match.length === 0)
+          {
+          $("#search_results").html('No ' + msg + ' Found! :(');
+          $("#search_box").empty();
+          }
+          else
+          $("#search_results").html('Showing ' + match.length + msg);
       }
-    </script>
-  </div>
-</div>
+        </script>
+    </div>
 </body>
+
 </html>
