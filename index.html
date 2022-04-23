@@ -8,46 +8,50 @@
   <style type="text/css">
     body {
       padding: 25px;
-      background-color: white;
-      color: black;
       font-size: 25px;
     }
 
     section {
       border: 10px black;
-      height: 90vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      height: auto;
+      padding: 10px;
     }
 
     .title {
-      border: 10px black;
+      border: 20px black;
       margin: auto;
-      height: 10vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 50%;
+      height: auto;
+      padding: 10px;
     }
 
     .container {
       border: 10px black;
-      max-width: 1500px;
       margin: auto;
-      height: 10vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: auto;
+      height: auto;
+      padding: 10px;
     }
 
     .content {
       border: 10px black;
-      max-width: 1500px;
       margin: auto;
-      height: 10vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: auto;
+      padding: 10px;
+    }
+
+    .card {
+      margin: auto;
+      width: 50%;
+      border: 3px solid rgb(0, 0, 0);
+      padding: 10px;
+    }
+
+    .synopsis {
+      margin: auto;
+      width: 50%;
+      border: 3px solid rgb(0, 0, 0);
+      padding: 10px;
     }
 
     .dark-mode {
@@ -79,9 +83,10 @@
 </head>
 
 <body>
+  <div id="grad1">
   <div class="mode">
     Display:
-    <button>
+    <button class="button change">
       <span class="change">☀ Light</span>
     </button>
   </div>
@@ -101,41 +106,75 @@
   </div>
   <div class="container">
     <!-- Content will go here -->
-    <div class="top">
-      <div class="search">
-        <label for="search_query"></label>
-        <input autocomplete="off" id="search_query" type="text" placeholder="" />
-        <button type="button" onclick="search()"> <img name="Search"
-            src="https://www.seekpng.com/png/detail/491-4914474_download-magnifying-lens-clipart-magnifying-glass-light-transparent.png"
-            width="30" height="30" onmouseover="onsearchImg.call(this)" onmouseout="offsearchImg.call(this)"></button>
-        <button type="button" onclick="randomize()"> <img name="Randomize"
-            src="https://static.thenounproject.com/png/801336-200.png" width="30" height="30"
-            onmouseover="onImg.call(this)" onmouseout="offImg.call(this)"></button>
-        <hr />
-      </div>
-    </div>
-    <div id="search_results" class="content">
-      <script>
-        document.getElementById("search_query").setAttribute('size', '100');
-        let suggestedAnime = [
-          "One Piece",
-          "Naruto",
-          "Bleach",
-          "Code Geass",
-          "Dr. Stone",
-          "Kimetsu No Yaiba",
-          "Haikyuu",
-          "Fruits Basket",
-          "Sailor Moon",
-          "Kaguya-Sama",
-          "Maid-Sama",
-        ];
-        document.addEventListener("DOMContentLoaded", () => {
-          randomize()
-        });
-      </script>
-    </div>
+    <label for="search_query"></label>
+    <input autocomplete="off" id="search_query" type="text" placeholder="" />
+    <button type="button" onclick="fetchData(); document.getElementById('search_query').value = null"> <img
+        name="Search"
+        src="https://www.seekpng.com/png/detail/491-4914474_download-magnifying-lens-clipart-magnifying-glass-light-transparent.png"
+        width="30" height="30" onmouseover="onsearchImg.call(this)" onmouseout="offsearchImg.call(this)"></button>
+    <button type="button" onclick="randomize(); document.getElementById('search_query').value = null"> <img
+        name="Randomize" src="https://static.thenounproject.com/png/801336-200.png" width="30" height="30"
+        onmouseover="onImg.call(this)" onmouseout="offImg.call(this)"></button>
+    <hr />
   </div>
+  <div id="search_box" class="content">
+    <script>
+      document.getElementById("search_query").setAttribute('size', '100');
+      let suggestedAnime = [
+        "One Piece",
+        "Naruto",
+        "Bleach",
+        "Code Geass",
+        "Doctor Stone",
+        "Kimetsu No Yaiba",
+        "Haikyuu",
+        "Fruits Basket",
+        "Horimiya",
+        "Kaguya-Sama",
+        "Maid-Sama",
+      ];
+      document.addEventListener("DOMContentLoaded", () => {
+        randomize()
+      });
+      async function fetchData() {
+        let request = document.getElementById('search_query').value;
+        if (request === '')
+          request = document.getElementById("search_query").placeholder;
+        $("#search_box").html("Searching...");
+        let aRequest = `https://api.jikan.moe/v4/anime?q=${request}&sfw`;
+        document.getElementById('search_query').value = null
+        const response = await fetch(aRequest);
+        const data = await response.json();
+        const match = [];
+        const maxResults = 10;
+        let i = 0;
+        data.data.forEach(o => {
+          if (i > maxResults) {
+            return;
+          }
+          match.push(
+            `<h3><a href="${o.url}" class="card">
+            <div class="card__name">
+              <span>${o.title}</span> 
+            </div>
+            <div class="card__image">
+              <img src="${o.images.jpg.large_image_url}" height="225" width="195" background="black"/>
+            </div>        
+            </a>
+            <div class="synopsis">
+            <p><font size="-1">Rank: ${o.rank || "Unranked"} | Popularity: ${o.popularity || "Unranked"}</font></p>
+            <p><font size="-1">${'Synopsis: ' + o.synopsis || 'No synopsis found!'}</font></p>
+            </div>
+            <hr />
+            </h3>`
+          )
+          $("#search_box").html(match.join("<br />"));
+          console.log(o.title);
+          i++;
+        });
+      }
+    </script>
+  </div>
+</div>
 </body>
-
 </html>
