@@ -4,7 +4,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-function randomize() {
+randomize = () => {
   let rand = Math.floor(Math.random() * suggestedAnime.length);
   document.getElementById("search_query").placeholder = suggestedAnime[rand];
   fetchData();
@@ -14,11 +14,15 @@ async function fetchData() {
   let request = document.getElementById('search_query').value;
   if (request === '')
     request = document.getElementById("search_query").placeholder;
-  $("#search_results").html("Searching...");
+  document.getElementById("search_results").textContent = "Searching...";
   let aRequest = `https://api.jikan.moe/v4/anime?q=${encodeURIComponent(request)}&sfw`;
   document.getElementById('search_query').value = null;
-  const response = await fetch(aRequest);
-  const data = await response.json();
+
+  const data = await fetch(aRequest)
+  .then(res => {
+    return res.json()
+  })
+
   const match = [];
   const maxResults = 10;
   let i = 0;
@@ -51,9 +55,9 @@ async function fetchData() {
   let msg = '';
   if (match.length === 1 ? msg = ' Result' : msg = ' Results');
   if (match.length === 0) {
-    $("#search_results").html('No ' + msg + ' Found! :(');
-    $("#search_box").empty();
+    document.getElementById("search_results").textContent = 'No ' + msg + ' Found! :(';
+    document.getElementById("search_box").textContent = null;
   }
   else
-    $("#search_results").html('Showing ' + match.length + msg);
+  document.getElementById("search_results").textContent = 'Showing ' + match.length + msg;
 }
